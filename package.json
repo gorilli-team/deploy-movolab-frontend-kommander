@@ -1,5 +1,5 @@
 {
-  "name": "movolab-frontend",
+  "name": "deploy-movolab-frontend-kommander",
   "version": "1.2.31",
   "license": "UNLICENSED",
   "private": true,
@@ -21,6 +21,7 @@
     "aws-sdk": "^2.1329.0",
     "codice-fiscale-js": "^2.3.20",
     "cross-env": "^7.0.3",
+    "deploy-movolab-frontend-kommander": "file:",
     "file-saver": "^2.0.5",
     "format-number": "^3.0.0",
     "html2pdf.js": "^0.10.1",
@@ -28,6 +29,7 @@
     "lucide-react": "^0.441.0",
     "moment": "^2.29.4",
     "movolab-frontend": "file:",
+    "patch-package": "^8.0.0",
     "react": "17.0.2",
     "react-color": "^2.17.3",
     "react-datetime": "^3.2.0",
@@ -70,12 +72,12 @@
     ]
   },
   "devDependencies": {
-    "patch-package": "^8.0.0",
-    "postinstall-postinstall": "^2.1.0",
+    "@babel/preset-env": "^7.26.0",
     "sass": "^1.77.8"
   },
   "resolutions": {
     "//": "See https://github.com/facebook/create-react-app/issues/11773",
+    "@babel/core": "^7.16.0",
     "react-error-overlay": "6.0.9"
   }
 }
