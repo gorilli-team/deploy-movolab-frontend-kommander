@@ -1,0 +1,26 @@
+.btn-check[type='file'] {
+    clip: initial;
+    pointer-events: unset;
+    opacity: 0;
+
+    &:focus ~ .form-control {
+        border-color: $input-focus-border-color;
+        box-shadow: $input-focus-box-shadow;
+
+        &.is-invalid {
+            border-color: $form-feedback-invalid-color;
+            box-shadow: 0 0 $input-btn-focus-blur $input-focus-width rgba($form-feedback-invalid-color, $input-btn-focus-color-opacity);
+        }
+    }
+    &:active ~ .form-control {
+        background: none;
+    }
+    &:disabled ~ .form-control {
+        background-color: $input-disabled-bg;
+        opacity: 1;
+    }
+    & ~ label.placeholder-shown {
+        transform: scale(1) translate(0);
+        max-width: 100%;
+    }
+}

@@ -1,0 +1,17 @@
+diff --git a/node_modules/rxjs-interop/dist/esm/to-observer.js b/node_modules/rxjs-interop/dist/esm/to-observer.js
+index 128e67c..7b8d2c7 100644
+--- a/node_modules/rxjs-interop/dist/esm/to-observer.js
++++ b/node_modules/rxjs-interop/dist/esm/to-observer.js
+@@ -8,9 +8,9 @@ export function toObserver(observer) {
+             return observer;
+         }
+         return {
+-            complete: (observer.complete ?? noop).bind(observer),
+-            error: (observer.error ?? rethrow).bind(observer),
+-            next: (observer.next ?? noop).bind(observer),
++            complete: (observer.complete || noop).bind(observer),
++            error: (observer.error || rethrow).bind(observer),
++            next: (observer.next || noop).bind(observer)
+         };
+     }
+     return {

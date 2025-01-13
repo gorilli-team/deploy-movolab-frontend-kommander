@@ -1,0 +1,21 @@
+export const groupColors = (mnemonic) => {
+  if (mnemonic === 'A') return 'bg-green-600 text-white p-3 rounded uppercase';
+  if (mnemonic === 'A+') return 'bg-green-700 text-white p-3 rounded uppercase';
+  if (mnemonic === 'B') return 'bg-blue-600 text-white p-3 rounded uppercase';
+  if (mnemonic === 'B+') return 'bg-blue-700 text-white p-3 rounded uppercase';
+  if (mnemonic === 'C') return 'bg-yellow-600 text-white p-3 rounded uppercase';
+  if (mnemonic === 'C+') return 'bg-yellow-700 text-white p-3 rounded uppercase';
+  if (mnemonic === 'D') return 'bg-red-600 text-white p-3 rounded uppercase';
+  if (mnemonic === 'D+') return 'bg-red-700 text-white p-3 rounded uppercase';
+  if (mnemonic === 'E') return 'bg-purple-600 text-white p-3 rounded uppercase';
+  if (mnemonic === 'E+') return 'bg-purple-700 text-white p-3 rounded uppercase';
+  if (mnemonic === 'F') return 'bg-pink-600 text-white p-3 rounded uppercase';
+  if (mnemonic === 'H') return 'bg-gray-600 text-white p-3 rounded uppercase';
+  if (mnemonic === 'K') return 'bg-indigo-600 text-white p-3 rounded uppercase';
+  if (mnemonic === 'L') return 'bg-lime-600 text-white p-3 rounded uppercase';
+  if (mnemonic === 'Z') return 'bg-lime-700 text-white p-3 rounded uppercase';
+  if (mnemonic === 'L9') return 'bg-cyan-600 text-white p-3 rounded uppercase';
+  if (mnemonic === '2WC') return 'bg-amber-600 text-white p-3 rounded uppercase';
+  if (mnemonic === '2WM') return 'bg-violet-600 text-white p-3 rounded uppercase';
+  if (mnemonic === '4W') return 'bg-orange-600 text-white p-3 rounded uppercase';
+};

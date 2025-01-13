@@ -1,0 +1,24 @@
+.form-floating {
+    > label {
+        opacity: 0.65;
+    }
+    > .icon-right {
+        opacity: 0.65;
+        transition: padding-top 300ms ease;
+    }
+    > .form-control:focus ~ .icon-right,
+    > .form-control:not(:placeholder-shown) ~ .icon-right {
+        padding-top: 1rem;
+    }
+
+    > .form-control-sm {
+        height: calc(1.5em + 1.5rem + 2px);
+        border-radius: 0.2rem;
+        font-size: 0.875rem;
+
+        & ~ label {
+            font-size: 0.875rem;
+            padding-top: 0.8rem;
+        }
+    }
+}

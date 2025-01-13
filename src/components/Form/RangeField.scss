@@ -1,0 +1,47 @@
+@import 'rc-slider/assets/index.css';
+
+.slider-container {
+  $size: 1rem;
+  $railBg: $gray-300;
+  $trackBg: $blue-300;
+  $handleBg: $blue;
+
+  padding: 0 $size / 2;
+
+  .rc-slider {
+    height: $size;
+  }
+  .rc-slider-rail,
+  .rc-slider-track {
+    height: $size / 2;
+    color: transparent;
+    border-radius: 1rem;
+  }
+  .rc-slider-rail {
+    cursor: pointer;
+    background-color: $railBg;
+  }
+  .rc-slider-track {
+    background-color: $trackBg;
+  }
+  .rc-slider-dot {
+    width: 1px;
+    height: $size / 2;
+    bottom: -$size / 4;
+    border: 0;
+  }
+  .rc-slider-handle {
+    width: $size;
+    height: $size;
+    margin-top: -$size / 4;
+    background-color: $handleBg;
+    border: 0;
+    border-radius: $size;
+    opacity: 1;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
+  }
+  .rc-slider-handle:focus {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgb(13 110 253 / 25%);
+  }
+}

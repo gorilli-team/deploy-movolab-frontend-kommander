@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link 
+      rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" 
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" 
+      crossOrigin="anonymous" 
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Movolab - Noleggia e Prenota auto in tutta Italia" />
+
+    <!-- June Analytics -->
+    <script>
+      window.analytics = {};
+      function juneify(writeKey) {
+        window.analytics._writeKey = writeKey;
+        var script = document.createElement('script');
+        script.type = 'application/javascript';
+        script.onload = function () {
+          window.analytics.page();
+        };
+        script.src = 'https://unpkg.com/@june-so/analytics-next/dist/umd/standalone.js';
+        var first = document.getElementsByTagName('script')[0];
+        first.parentNode.insertBefore(script, first);
+      }
+      juneify('TZVfCfeN1rLTXpCC');
+    </script>
+
+    <!-- Google Maps -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACsCVE5qB9Dxbax4BGRET948-bvkX8MMI&libraries=places&language=it-IT"
+      async
+      defer
+    ></script>
+
+
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>Movolab</title>
+  </head>
+  <body class="font-inter antialiased text-white tracking-tight">
+    <div id="root"></div>
+  </body>
+</html>

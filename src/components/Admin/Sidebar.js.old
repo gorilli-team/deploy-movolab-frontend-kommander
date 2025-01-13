@@ -1,0 +1,104 @@
+import React, { useEffect, useRef } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { SIDEBAR_MENU } from './SidebarMenu.js';
+
+function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
+  const location = useLocation();
+  const { pathname } = location;
+
+  const trigger = useRef(null);
+  const sidebar = useRef(null);
+
+  // close on click outside
+  useEffect(() => {
+    const clickHandler = ({ target }) => {
+      if (!sidebar.current || !trigger.current) return;
+      if (!sidebarOpen || sidebar.current.contains(target) || trigger.current.contains(target))
+        return;
+      setSidebarOpen(false);
+    };
+    document.addEventListener('click', clickHandler);
+    return () => document.removeEventListener('click', clickHandler);
+  });
+
+  // close if the esc key is pressed
+  useEffect(() => {
+    const keyHandler = ({ keyCode }) => {
+      if (!sidebarOpen || keyCode !== 27) return;
+      setSidebarOpen(false);
+    };
+    document.addEventListener('keydown', keyHandler);
+    return () => document.removeEventListener('keydown', keyHandler);
+  });
+
+  return (
+    <div className="">
+      {/* Sidebar backdrop (mobile only) */}
+      <div
+        className={`fixed inset-0 bg-gray-900 bg-opacity-30 z-40 lg:hidden lg:z-auto transition-opacity duration-200
+          ${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        aria-hidden="true"
+      ></div>
+
+      {/* Sidebar */}
+      <div
+        id="sidebar"
+        ref={sidebar}
+        className={`bg-indigo-800 lg:left-auto lg:top-auto transform h-screen hidden md:flex md:flex-grow
+          overflow-y-scroll lg:overflow-y-auto no-scrollbar flex-shrink-0 py-3 transition-transform duration-200 ease-in-out`}
+      >
+        {/* Links */}
+        <div className="">
+          <ul>
+            {Object.keys(SIDEBAR_MENU).map((path, key) => {
+              const item = SIDEBAR_MENU[path];
+              const selected = pathname === path;
+              return (
+                <li
+                  key={key}
+                  className={`px-6 py-2 rounded-sm mb-0.5 last:mb-0 ${selected && 'bg-gray-900'}`}
+                >
+                  <NavLink
+                    exact
+                    to={path}
+                    className={`block text-white hover:text-white transition duration-150 ${
+                      selected && 'hover:text-gray-200'
+                    }`}
+                  >
+                    <div className="flex flex-grow items-center">
+                      {item.icon(selected)}
+                      <span className="text-sm font-medium lg:inline-block">{item.label}</span>
+                    </div>
+                  </NavLink>
+                  {item.nestedItems && (
+                    <ul className="ml-2">
+                      {item.nestedItems.map((nestedItem, key) => (
+                        <li key={key}>
+                          <NavLink
+                            exact
+                            to={nestedItem.url}
+                            className={`block text-slate-400 hover:text-white transition duration-150 ${
+                              selected && 'hover:text-gray-200'
+                            }`}
+                          >
+                            <div className="flex flex-grow items-center ml-4 mt-2">
+                              <span className="text-sm font-medium lg:inline-block">
+                                {nestedItem.label}
+                              </span>
+                            </div>
+                          </NavLink>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default AdminSidebar;

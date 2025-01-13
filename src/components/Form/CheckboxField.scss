@@ -1,0 +1,82 @@
+// buttons
+.btn-check + .btn {
+    background-color: $white;
+    border-color: $gray-400;
+}
+.btn-check:checked + .btn {
+    border-color: $primary;
+    background-color: rgba($primary, 0.075);
+}
+.btn-check + .btn.is-invalid {
+    border-color: $red;
+}
+.btn-check:focus + .btn, .btn:focus {
+    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+}
+.btn-check:disabled + .btn {
+    background-color: $gray-200;
+    opacity: 1;
+}
+
+// toggle
+.form-toggle-container {
+    display: flex;
+    align-items: center;
+    height: 3.625rem;
+}
+.form-toggle-container.form-toggle-container-inline {
+    height: inherit;
+}
+.form-toggle {
+    position: relative;
+    width: 3rem;
+}
+.form-toggle:before {
+    content: '';
+    display: block;
+    opacity: 0.4;
+    border: 1px solid rgba(0,0,0,0);
+    background-color: rgb(173,181,189);
+    height: 0.9rem;
+    border-radius: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 0.25rem;
+    right: 0.25rem;
+    transform: translateY(-50%);
+    transition: all 0.15s ease-in-out;
+}
+input[type=checkbox]:active + .form-toggle:before {
+    background-color: #b3d7ff;
+    border-color: #b3d7ff;
+}
+input[type=checkbox]:focus + .form-toggle:before {
+    border-color: #6c757d;
+    box-shadow: 0 0 0 0.2rem rgb(108 117 125 / 50%);
+}
+input[type=checkbox]:checked + .form-toggle:before {
+    opacity: 1;
+    background-color: #007bff;
+}
+input[type=checkbox]:checked:focus + .form-toggle:before {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}
+.form-toggle:after {
+    content: '';
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 1.5rem;
+    background-color: #fff;
+    box-shadow: 0 1px 1px 2px rgb(0,0,0,0.08);
+    position: relative;
+    z-index: 1;
+    left: 0;
+    transform: translateX(0);
+    transition: all 0.15s ease-in-out;
+}
+input[type=checkbox]:checked + .form-toggle:after {
+    left: 100%;
+    transform: translateX(-100%);
+}
