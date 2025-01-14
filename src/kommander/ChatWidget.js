@@ -395,7 +395,7 @@ const ChatWidget = () => {
       
          try {
      
-          const response = await fetch("http://localhost:5000/create_conversation", {
+          const response = await fetch("https://kommander-backend.onrender.com/create_conversation", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
