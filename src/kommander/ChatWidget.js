@@ -53,7 +53,7 @@ const ChatWidget = () => {
       addMessage("kommander", "", true);
   
       try {
-        const response = await fetch("http://localhost:5000/new_message", {
+        const response = await fetch("https://kommander-backend.onrender.com/new_message", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ message_text: trimmedMessage, message_type: "text" }),
@@ -140,7 +140,7 @@ const ChatWidget = () => {
         const formData = new FormData();
         formData.append("audio", audioFile, "audioMessage.wav");
   
-        const response = await fetch("http://localhost:5000/upload-audio", {
+        const response = await fetch("https://kommander-backend.onrender.com/upload-audio", {
           method: "POST",
           body: formData,
         });
@@ -264,7 +264,7 @@ const ChatWidget = () => {
     
       if (vehicles.length > 0) {
         try {
-          const response = await fetch("http://localhost:5000/choose_vehicle_message", {
+          const response = await fetch("https://kommander-backend.onrender.com/choose_vehicle_message", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message_text: trimmedMessage, message_type: "text", availableVehicles: vehicles }),
@@ -274,7 +274,7 @@ const ChatWidget = () => {
           const responseText = result.selectionVehicle.selectedVehicle.responseText || "Errore di interpretazione. Riprova.";
           const reservationId = result.reservation.updatedReservation._id;
     
-          let messageContent = `${responseText}<br /><div class="mt-2"><a href="http://localhost:3000/dashboard/prenotazioni/${reservationId}" rel="noopener noreferrer" class="inline-block px-4 py-2 border border-blue-500 text-blue-500 bg-white rounded-md text-center hover:bg-blue-500 hover:text-white transition-colors">Vedi la tua prenotazione</a></div>`;
+          let messageContent = `${responseText}<br /><div class="mt-2"><a href="https://deploy-movolab-frontend-kommander.onrender.com/dashboard/prenotazioni/${reservationId}" rel="noopener noreferrer" class="inline-block px-4 py-2 border border-blue-500 text-blue-500 bg-white rounded-md text-center hover:bg-blue-500 hover:text-white transition-colors">Vedi la tua prenotazione</a></div>`;
   
           setMessages((prevMessages) => {
             const newMessages = [...prevMessages];
@@ -323,7 +323,7 @@ const ChatWidget = () => {
           formData.append("audio", audioFile, "audioMessage.wav");
           formData.append("availableVehicles", JSON.stringify(vehicles));
     
-          const response = await fetch("http://localhost:5000/choose_vehicle_audio", {
+          const response = await fetch("https://kommander-backend.onrender.com/choose_vehicle_audio", {
             method: "POST",
             body: formData,
           });
@@ -334,7 +334,7 @@ const ChatWidget = () => {
           const responseText = result.selectionVehicle.selectedVehicle.responseText || "Errore di interpretazione. Riprova.";
           const reservationId = result.reservation.updatedReservation._id;
   
-          let messageContent = `${responseText}<br /><div class="mt-2"><a href="http://localhost:3000/dashboard/prenotazioni/${reservationId}" rel="noopener noreferrer" class="inline-block px-4 py-2 border border-blue-500 text-blue-500 bg-white rounded-md text-center hover:bg-blue-500 hover:text-white transition-colors">Vedi la tua prenotazione</a></div>`;
+          let messageContent = `${responseText}<br /><div class="mt-2"><a href="https://deploy-movolab-frontend-kommander.onrender.com/dashboard/prenotazioni/${reservationId}" rel="noopener noreferrer" class="inline-block px-4 py-2 border border-blue-500 text-blue-500 bg-white rounded-md text-center hover:bg-blue-500 hover:text-white transition-colors">Vedi la tua prenotazione</a></div>`;
   
           setMessages((prevMessages) => {
             const newMessages = [...prevMessages];
