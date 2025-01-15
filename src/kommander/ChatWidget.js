@@ -41,65 +41,69 @@ const ChatWidget = () => {
   
     const handleTextSubmit = async (e) => {
       e.preventDefault();
-  
+    
       const trimmedMessage = message.trim(); 
-  
+    
       if (!trimmedMessage) return;
-  
+    
       addMessage("user", trimmedMessage);
       setMessage("");
-  
+    
       setIsLoading(true);
       addMessage("kommander", "", true);
-  
+    
       try {
         const response = await fetch("https://kommander-backend.onrender.com/new_message", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ message_text: trimmedMessage, message_type: "text" }),
         });
-  
+    
         const result = await response.json();
         console.log("Risultato ricevuto:", result);
-  
+    
         const errorMessage = result.responseText || "Errore di interpretazione. Riprova.";
         const responseText =
           result.createdMessage?.parameters?.response?.responseText || errorMessage;
-  
+    
         const availableVehicles = result.availableVehicles?.result || [];
         const missingParameters = result.missingParameters || [];
-  
+    
         setVehicles(availableVehicles);
-  
-        let messageContent = responseText;
-  
-        if (availableVehicles.length > 0) {
-          const vehiclesList = `
-            <div class="vehicle-grid">
-              ${availableVehicles
-                .map(
-                  (vehicle, index) => `
-              <div class="vehicle-card">
-                <div>
-                  <span class="vehicle-index">${index + 1}</span>
-                </div>
-                <div class="vehicle-card-image">
-                  <img src=${vehicle.version?.imageUrl} alt=${vehicle.id} />
-                </div>
-                <div class="vehicle-card-content">
-                  <p><strong>${vehicle.plate}</strong></p>
-                  <p>${vehicle.brand?.brandName}</p>
-                  <p>${vehicle.model?.modelName}</p>
-                </div>
-              </div>`
-                )
-                .join("")}
-            </div>`;
-          messageContent += `<br /> <p>Scegli uno dei seguenti veicoli: </p> <br />${vehiclesList}`;
+    
+        let messageContent = "";
+    
+        if (availableVehicles.length === 0 && missingParameters.length === 0) {
+          messageContent = `<p>Nessun veicolo disponibile.</p>`;
         } else {
-          messageContent += `<p>Nessun veicolo disponibile.</p>`;
+          messageContent = responseText;
+    
+          if (availableVehicles.length > 0) {
+            const vehiclesList = `
+              <div class="vehicle-grid">
+                ${availableVehicles
+                  .map(
+                    (vehicle, index) => `
+                  <div class="vehicle-card">
+                    <div>
+                      <span class="vehicle-index">${index + 1}</span>
+                    </div>
+                    <div class="vehicle-card-image">
+                      <img src=${vehicle.version?.imageUrl} alt=${vehicle.id} />
+                    </div>
+                    <div class="vehicle-card-content">
+                      <p><strong>${vehicle.plate}</strong></p>
+                      <p>${vehicle.brand?.brandName}</p>
+                      <p>${vehicle.model?.modelName}</p>
+                    </div>
+                  </div>`
+                  )
+                  .join("")}
+              </div>`;
+            messageContent += `<br /> <p>Scegli uno dei seguenti veicoli: </p> <br />${vehiclesList}`;
+          }
         }
-        
+    
         setMessages((prevMessages) => {
           const newMessages = [...prevMessages];
           const lastKommanderMessage = newMessages.find(
@@ -128,6 +132,7 @@ const ChatWidget = () => {
         setIsLoading(false);
       }
     };
+    
   
     const handleAudioSubmit = async () => {
       if (!audioFile) return;
@@ -461,8 +466,8 @@ const ChatWidget = () => {
       }`}
       >
           <div className="banner-custom-title flex items-center justify-between border-b border-gray-200 bg-gray-50 p-4">
-            <div className="flex">
-              <h2 className="font-bold">Prenota il tuo veicolo</h2>
+            <div className="flex items-center">
+              <span className="font-bold">Prenota il tuo veicolo</span>
               <button
                   onClick={handleConfirmExit}
                   className="text-gray-600 hover:text-blue-500 ml-2"

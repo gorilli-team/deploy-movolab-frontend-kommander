@@ -339,7 +339,7 @@ const Dashboard = () => {
               <div className='mt-2'>
                 <button
                 onClick={togglePanel}
-                className="rounded-lg flex items-center justify-center hover:bg-blue-600 py-2 px-4 shadow-md transition-all duration-200 button-open-widget"
+                className="rounded-lg flex items-center justify-center py-2 px-4 shadow-md transition-all duration-200 button-open-widget"
                 >
                 <img src="/logo-kommander.png" alt="kommander-icon" className="logo-kommander-button" />
                 <span className='pl-2'>Kommander.ai</span>
