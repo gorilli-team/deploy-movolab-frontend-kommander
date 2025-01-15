@@ -96,6 +96,8 @@ const ChatWidget = () => {
                 .join("")}
             </div>`;
           messageContent += `<br /> <p>Scegli uno dei seguenti veicoli: </p> <br />${vehiclesList}`;
+        } else {
+          messageContent += `<p>Nessun veicolo disponibile.</p>`;
         }
         
         setMessages((prevMessages) => {
@@ -181,6 +183,8 @@ const ChatWidget = () => {
                 .join("")}
             </div>`;
             messageContent += `<br /> <p>Scegli uno dei seguenti veicoli: </p> <br />${vehiclesList}`;
+        } else {
+          messageContent += `<p>Nessun veicolo disponibile.</p>`;
         }
         
         setMessages((prevMessages) => {

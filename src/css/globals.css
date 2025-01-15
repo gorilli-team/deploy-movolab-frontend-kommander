@@ -256,3 +256,11 @@ textarea.w-full.text-area-custom::-webkit-scrollbar {
 .div-audio-temp{
   padding-bottom: 10px;
 }
+
+.logo-kommander-button {
+  height: 20px;
+}
+
+.button-open-widget{
+  border: 1px solid #1D58DB;
+}

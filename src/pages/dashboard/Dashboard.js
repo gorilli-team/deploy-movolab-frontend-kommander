@@ -12,6 +12,7 @@ import moment from 'moment/min/moment-with-locales';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import SmartAssistantModal from '../../components/SmartAssistant/SmartAssistantModal';
 // import SmartAssistantButton from '../../components/SmartAssistant/SmartAssistantButton';
+import ChatWidget from '../../kommander/ChatWidget';
 
 moment.locale('it');
 
@@ -186,6 +187,12 @@ const Dashboard = () => {
     ],
   };
 
+  //KOMMANDER
+  const [isOpen, setIsOpen] = useState(false);
+  const togglePanel = () => {
+    setIsOpen((prev) => !prev);
+  };
+
   return (
     <Page canAccess={[CLIENT_ROLE_ADMIN, CLIENT_ROLE_OPERATOR]}>
       <WhiteBox>
@@ -314,7 +321,7 @@ const Dashboard = () => {
         <div className="flex p-7 gap-x-4 md:mb-6 flex-wrap relative">
           <div className="w-10/12 md:w-80">
             <div className="text-xl md:text-3xl">
-              Ciao <span className="font-semibold">{userData?.fullname}</span>
+              Ciao<span className="font-semibold">{userData?.fullname}</span>
             </div>
             <div className="text-sm mt-4">
               {userData?.role === 'clientAdmin' ? 'Amministratore' : 'Operatore'}
@@ -329,6 +336,44 @@ const Dashboard = () => {
                   )}
                 </div>
               </div>
+              <div className='mt-2'>
+                <button
+                onClick={togglePanel}
+                className="rounded-lg flex items-center justify-center hover:bg-blue-600 py-2 px-4 shadow-md transition-all duration-200 button-open-widget"
+                >
+                <img src="/logo-kommander.png" alt="kommander-icon" className="logo-kommander-button" />
+                <span className='pl-2'>Kommander.ai</span>
+                </button>
+              </div>
+              {isOpen && (
+              <div className="fixed inset-0 flex items-center justify-center z-50">
+                <div
+                  style={{
+                    width: '60%',
+                    height: '650px',
+                    backgroundColor: 'white',
+                    border: '1px solid #ddd',
+                    borderRadius: '10px',
+                    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+                    overflow: 'hidden',
+                    zIndex: 1000,
+                  }}
+                  className="relative w-11/12 max-w-4xl border border-gray-300 rounded-lg shadow-lg"
+                >
+
+                  <ChatWidget />
+
+                  
+                  <button
+                    onClick={togglePanel}
+                    className="absolute top-2 right-2 rounded-full w-6 h-6 flex justify-center items-center close-kommander-widget"
+                    style={{ zIndex: 2000 }}
+                  >
+                    <i className="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              )}
             </div>
             {/* Temporary disabled */}
             {/* <div className="text-sm mt-4">

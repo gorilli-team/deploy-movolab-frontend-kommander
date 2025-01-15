@@ -8,8 +8,6 @@ import { TextField as TextInternal } from '../../../components/Form/TextField';
 import { SelectField } from '../../../components/Form/SelectField';
 import ElementLabel from '../../../components/UI/ElementLabel';
 
-import ChatWidget from '../../../kommander/ChatWidget';
-
 import { http } from '../../../utils/Utils';
 import useGroups from '../../../hooks/useGroups';
 import FormLabel from '../../../components/UI/FormLabel';
@@ -700,12 +698,6 @@ const SimpleReservation = ({
     }
   }, [days, ranges]);
 
-  //KOMMANDER
-  const [isOpen, setIsOpen] = useState(false);
-  const togglePanel = () => {
-    setIsOpen((prev) => !prev);
-  };
-
   return (
     <>
       <RouterPrompt
@@ -756,47 +748,8 @@ const SimpleReservation = ({
         />
       </CardsHeader>
       <WhiteBox className="mt-0 mx-6 overflow-visible">
-        <div className="p-4 w-full">
-        {activeStep !== 2 && (
-          <div className="flex justify-between">
-            <h1 className="text-xl font-medium">Ricerca</h1>
-            <button
-              onClick={togglePanel}
-              className="ml-4 flex items-center justify-centeAr w-8 h-8"
-              >
-              <img src="/logo-kommander.png" alt="kommander-icon" className="w-full h-full" />
-            </button>
-            {isOpen && (
-              <div className="fixed inset-0 flex items-center justify-center z-50">
-                <div
-                  style={{
-                    width: '60%',
-                    height: '650px',
-                    backgroundColor: 'white',
-                    border: '1px solid #ddd',
-                    borderRadius: '10px',
-                    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-                    overflow: 'hidden',
-                    zIndex: 1000,
-                  }}
-                  className="relative w-11/12 max-w-4xl border border-gray-300 rounded-lg shadow-lg"
-                >
-
-                  <ChatWidget />
-
-                  
-                  <button
-                    onClick={togglePanel}
-                    className="absolute top-2 right-2 rounded-full w-6 h-6 flex justify-center items-center close-kommander-widget"
-                    style={{ zIndex: 2000 }}
-                  >
-                    <i className="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
+      <div className="p-4 w-full">
+      {activeStep !== 2 && <h1 className="text-xl font-medium">Ricerca</h1>}
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <fieldset disabled={form.formState.isSubmitting}>
               <div className="flex flex-wrap gap-x-4 pt-2">
