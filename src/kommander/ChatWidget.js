@@ -23,6 +23,10 @@ const ChatWidget = () => {
         setIsRecording(false);
       },
     });
+
+    useEffect(() => {
+      handleNewConversation();
+    }, []);
   
     const addMessage = (type, content, isLoading = false) => {
       setMessages((prevMessages) => [
@@ -74,7 +78,7 @@ const ChatWidget = () => {
         let messageContent = "";
     
         if (availableVehicles.length === 0 && missingParameters.length === 0) {
-          messageContent = `<p>Nessun veicolo disponibile.</p>`;
+          messageContent = `<p>Nessun veicolo disponibile del seguente tipo. Riprova!</p>`;
         } else {
           messageContent = responseText;
     
@@ -163,33 +167,37 @@ const ChatWidget = () => {
   
         setVehicles(availableVehicles);
   
-        let messageContent = responseText;
-  
-        if (availableVehicles.length > 0) {
-          const vehiclesList = `
-            <div class="vehicle-grid">
-              ${availableVehicles
-                .map(
-                  (vehicle, index) => `
-              <div class="vehicle-card">
-                <div>
-                  <span class="vehicle-index">${index + 1}</span>
-                </div>
-                <div class="vehicle-card-image">
-                  <img src=${vehicle.version?.imageUrl} alt=${vehicle.id} />
-                </div>
-                <div class="vehicle-card-content">
-                  <p><strong>${vehicle.plate}</strong></p>
-                  <p>${vehicle.brand?.brandName}</p>
-                  <p>${vehicle.model?.modelName}</p>
-                </div>
-              </div>`
-                )
-                .join("")}
-            </div>`;
-            messageContent += `<br /> <p>Scegli uno dei seguenti veicoli: </p> <br />${vehiclesList}`;
+        let messageContent = "";
+    
+        if (availableVehicles.length === 0 && missingParameters.length === 0) {
+          messageContent = `<p>Nessun veicolo disponibile del seguente tipo. Riprova!</p>`;
         } else {
-          messageContent += `<p>Nessun veicolo disponibile.</p>`;
+          messageContent = responseText;
+    
+          if (availableVehicles.length > 0) {
+            const vehiclesList = `
+              <div class="vehicle-grid">
+                ${availableVehicles
+                  .map(
+                    (vehicle, index) => `
+                  <div class="vehicle-card">
+                    <div>
+                      <span class="vehicle-index">${index + 1}</span>
+                    </div>
+                    <div class="vehicle-card-image">
+                      <img src=${vehicle.version?.imageUrl} alt=${vehicle.id} />
+                    </div>
+                    <div class="vehicle-card-content">
+                      <p><strong>${vehicle.plate}</strong></p>
+                      <p>${vehicle.brand?.brandName}</p>
+                      <p>${vehicle.model?.modelName}</p>
+                    </div>
+                  </div>`
+                  )
+                  .join("")}
+              </div>`;
+            messageContent += `<br /> <p>Scegli uno dei seguenti veicoli: </p> <br />${vehiclesList}`;
+          }
         }
         
         setMessages((prevMessages) => {
@@ -415,6 +423,10 @@ const ChatWidget = () => {
       
           const result = await response.json();
           console.log("Conversazione creata con successo:", result);
+
+          const successMessage = result.message || "Conversazione creata con successo!";
+
+          addMessage("kommander", successMessage);
       
         } catch (error) {
           console.error("Errore durante la creazione della conversazione:", error);
@@ -433,6 +445,8 @@ const ChatWidget = () => {
       
         setIsConfirmationOpen(false);
        };
+
+       
       
       
     return (
@@ -440,23 +454,23 @@ const ChatWidget = () => {
   
        {isConfirmationOpen && (
        <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-       <div className="rounded-lg p-6 text-center bg-white shadow-lg">
-       <span className="font-bold question-alert">Sei sicuro di voler chiudere questa conversazione?</span>
-       <div className="flex space-x-2 div-buttons-alert">
-       <button
-       className="btn-alert btn-alert-no border-gray-100 py-2 px-4 text-sm bg-red-500"
-       onClick={handleConfirmationNo}
-       >
-       No
-       </button>
-       <button
-       className="btn-alert btn-alert-yes border-red-800 py-2 px-4 text-sm bg-green-500"
-       onClick={handleNewConversation}
-       >
-       Sì
-       </button>
-      </div>
-       </div>
+          <div className="rounded-lg p-6 text-center bg-white shadow-lg">
+          <span className="font-bold question-alert">Sei sicuro di voler chiudere questa conversazione?</span>
+          <div className="flex space-x-2 div-buttons-alert">
+          <button
+          className="btn-alert btn-alert-no border-gray-100 py-2 px-4 text-sm bg-red-500"
+          onClick={handleConfirmationNo}
+          >
+          No
+          </button>
+          <button
+          className="btn-alert btn-alert-yes border-red-800 py-2 px-4 text-sm bg-green-500"
+          onClick={handleNewConversation}
+          >
+          Sì
+          </button>
+          </div>
+          </div>
        </div>
        )}
   
@@ -466,18 +480,28 @@ const ChatWidget = () => {
       }`}
       >
           <div className="banner-custom-title flex items-center justify-between border-b border-gray-200 bg-gray-50 p-4">
-            <div className="flex items-center">
-              <span className="font-bold">Prenota il tuo veicolo</span>
-              <button
-                  onClick={handleConfirmExit}
-                  className="text-gray-600 hover:text-blue-500 ml-2"
-                >
-                <i className="w-6 h-6 flex justify-center items-center fa-solid fa-pen-to-square text-xl"></i>
-              </button>
+            <div className="flex items-center justify-between">
+              <div className="flex">
+                <img 
+                  src="/logo-kommander.png" 
+                  alt="Kommander Icon" 
+                  className="w-6 h-6" 
+                />
+                <span className="font-bold text-lg ml-2">kommander.ai</span>
+              </div>
+              <div>
+                <button
+                    onClick={handleConfirmExit}
+                    className="text-gray-600 hover:text-blue-500 ml-4"
+                  >
+                  <i className="w-6 h-6 flex justify-center items-center fa-solid fa-pen-to-square text-xl"></i>
+                </button>
+              </div>
+              
             </div>
           </div>    
           <div
-            className={`${audioFile ? "banner-custom-chat-audio" : "banner-custom-chat"} p-4`}
+            className={`${audioFile ? "banner-custom-chat-audio" : "banner-custom-chat"} px-4 py-2`}
             ref={messageContainerRef}
           >
           {messages.map((message, index) => (

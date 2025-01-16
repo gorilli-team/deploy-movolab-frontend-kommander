@@ -37,7 +37,7 @@
 
 .banner-chat-kommander{
   width: 50%;
-  margin-top: 40px;
+  margin-top: 20px;
   padding-left: 70px;
 }
 
@@ -62,6 +62,7 @@
 .info-message-div, .message{
   padding-left: 8px;
   font-size: 14px;
+  padding-top: 2px;
 }
 
 
@@ -91,6 +92,11 @@
 
 .btn-send:hover {
   background-color: rgb(240, 241, 242);
+}
+
+.btn-new-conversation {
+  width: 200px;
+  background-color: grey;
 }
 
 .btn-alert {

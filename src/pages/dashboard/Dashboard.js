@@ -366,7 +366,7 @@ const Dashboard = () => {
                   
                   <button
                     onClick={togglePanel}
-                    className="absolute top-2 right-2 rounded-full w-6 h-6 flex justify-center items-center close-kommander-widget"
+                    className="absolute top-2 right-2 rounded-full w-6 h-6 flex justify-center items-center close-kommander-widget hover:text-blue-500"
                     style={{ zIndex: 2000 }}
                   >
                     <i className="fas fa-times"></i>
@@ -375,10 +375,6 @@ const Dashboard = () => {
               </div>
               )}
             </div>
-            {/* Temporary disabled */}
-            {/* <div className="text-sm mt-4">
-              <SmartAssistantButton onClick={() => setShowSmartAssistantModal(true)} />
-            </div> */}
           </div>
           <div className="flex-1 pt-5 pr-5 md:p-0 absolute md:relative top-0 right-0">
             <div
