@@ -576,25 +576,35 @@ const ChatWidget = () => {
                 </button>
               </div>
             </div>
-  
+
             <div className="flex flex-col buttons-div items-center w-full space-y-2">
               <button
                 className="btn-send border border-gray-300 py-2 px-4 text-sm"
-                onClick={handleTextButtonClick}
-                disabled={isRecording || !message.trim()}
+                onClick={(e) => {
+                  if (message.trim()) {
+                    handleTextButtonClick(e);
+                  } else if (audioFile) {
+                    handleAudioButtonClick();
+                  }
+                }}
+                disabled={isRecording || (!message.trim() && !audioFile)}
               >
-                <span><i className="fa-solid fa-keyboard pr-2"></i>Invia messaggio</span>
-              </button>
-  
-              <button
-                className="btn-send border border-gray-300 py-2 px-4 text-sm"
-                onClick={handleAudioButtonClick}
-                disabled={isRecording || !audioFile}
-              >
-                <span><i className="fa-solid fa-file-audio pr-2"></i>Invia audio</span>
+                <span>
+                  {message.trim() ? (
+                    <>
+                      <i className="fa-solid fa-keyboard pr-2"></i>Invia messaggio
+                    </>
+                  ) : (
+                    <>
+                      <i className="fa-solid fa-file-audio pr-2"></i>Invia audio
+                    </>
+                  )}
+                </span>
               </button>
             </div>
           </div>
+
+
   
           <div className="bg-gray-50 div-audio-temp">
             {audioFile && (
