@@ -267,10 +267,34 @@ textarea.w-full.text-area-custom::-webkit-scrollbar {
   height: 20px;
 }
 
-.button-open-widget{
+
+.button-open-widget {
   border: 1px solid #1D58DB;
+  background-color: white;
+  color: black;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.button-open-widget:hover{
-  background-color: lightblue;
+.button-open-widget:hover {
+  background-color: #1D58DB;
+  color: white;
+}
+
+.logo-kommander-button {
+  display: inline-block;
+  transition: opacity 0.3s ease;
+}
+
+.arrow-icon {
+  display: none;
+  margin-left: 8px;
+}
+
+.button-open-widget:hover .logo-kommander-button {
+  display: none;
+}
+
+.button-open-widget:hover .arrow-icon {
+  display: inline-block;
+  color: white;
 }

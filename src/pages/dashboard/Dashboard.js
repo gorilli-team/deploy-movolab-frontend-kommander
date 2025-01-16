@@ -336,15 +336,23 @@ const Dashboard = () => {
                   )}
                 </div>
               </div>
-              <div className='mt-2'>
+              <div className="mt-2">
                 <button
-                onClick={togglePanel}
-                className="rounded-lg flex items-center justify-center py-2 px-4 shadow-md transition-all duration-200 button-open-widget"
-                >
-                <img src="/logo-kommander.png" alt="kommander-icon" className="logo-kommander-button" />
-                <span className='pl-2'>Kommander.ai</span>
+                  onClick={togglePanel}
+                  className="rounded-lg flex items-center justify-center py-2 px-4 shadow-md button-open-widget"
+                > 
+                  <img
+                    src="/logo-kommander.png"
+                    alt="kommander-icon"
+                    className="logo-kommander-button"
+                  />
+                  <span className="pl-2 font-bold flex items-center">
+                    Prenotazione Smart
+                    <i className="fa-solid fa-arrow-right ml-2 arrow-icon"></i>
+                  </span>
                 </button>
               </div>
+
               {isOpen && (
               <div className="fixed inset-0 flex items-center justify-center z-50">
                 <div
