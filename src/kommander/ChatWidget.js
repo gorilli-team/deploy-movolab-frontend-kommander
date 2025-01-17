@@ -554,7 +554,7 @@ const ChatWidget = () => {
             ))}
           </div>
   
-          <div className="banner-custom-footer flex w-full items-center justify-between border-t border-gray-200 bg-gray-50 p-4">
+          <div className="banner-custom-footer flex w-full items-center justify-between bg-red-600 p-4">
             <div className="flex w-full items-center text-area-div rounded-md border border-gray-300 p-2 bg-white">
               <textarea
                 className="w-full text-area-custom outline-none resize-none"
