@@ -1,11 +1,16 @@
 "use client"
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { useReactMediaRecorder } from "react-media-recorder";
 import { movolabAuthToken } from '../store/UserContext';
+import { UserContext } from '../store/UserContext';
 
 const ChatWidget = () => {
-   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { data: userData } = useContext(UserContext);
+
+    const fullname = userData?.fullname || 'Nome Utente';
+    const imageUrl = userData?.imageUrl || '/spiaggia-tramonto.png';
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [message, setMessage] = useState("");
     const [audioFile, setAudioFile] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -428,7 +433,7 @@ const ChatWidget = () => {
           const result = await response.json();
           console.log("Conversazione creata con successo:", result);
 
-          const successMessage = result.message || "Conversazione creata con successo!";
+          const successMessage = `Ciao ${fullname}! Invia un messaggio e prenota il tuo veicolo.`;
 
           addMessage("kommander", successMessage);
       
@@ -504,7 +509,7 @@ const ChatWidget = () => {
                 <div className={`banner-chat-${message.type} flex`}>
                   <img
                     className="logo-kommander-chat"
-                    src={message.type === "user" ? "/spiaggia-tramonto.png" : "/Logo (1).png"}
+                    src={message.type === "user" ? imageUrl : "/Logo (1).png"}
                     alt={`${message.type}-icon`}
                   />
                   <div>
