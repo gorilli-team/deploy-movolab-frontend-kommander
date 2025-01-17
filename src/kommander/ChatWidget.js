@@ -554,18 +554,18 @@ const ChatWidget = () => {
             ))}
           </div>
   
-          <div className="banner-custom-footer flex w-full items-center justify-between bg-red-600 p-4">
-            <div className="flex w-full items-center text-area-div rounded-md border border-gray-300 p-2 bg-white">
+          <div className="banner-custom-footer flex w-full items-center justify-between p-4">
+            <div className="flex flex-col w-full items-center text-area-div rounded-md border border-gray-300 p-2">
               <textarea
-                className="w-full text-area-custom outline-none resize-none"
+                className="w-full text-area-custom outline-none resize-none pr-2"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Scrivi un messaggio..."
                 disabled={isRecording}
               />
-              <div className="register-div">
+              <div className="flex items-center justify-end w-full h-full">
                 <button
-                  className="btn-microphone ml-2 text-gray-600 hover:text-blue-500 focus:outline-none"
+                  className="btn-microphone ml-2 text-dark focus:outline-none"
                   onClick={handleMicrophoneClick}
                 >
                   {isRecording ? (
@@ -574,33 +574,33 @@ const ChatWidget = () => {
                     <i className="fa-solid fa-microphone text-xl"></i>
                   )}
                 </button>
-              </div>
-            </div>
+            
+                <button
+                  className="btn-send py-2 px-4 text-sm"
+                  onClick={(e) => {
+                    if (message.trim()) {
+                      handleTextButtonClick(e);
+                    } else if (audioFile) {
+                      handleAudioButtonClick();
+                    }
+                  }}
+                  disabled={isRecording || (!message.trim() && !audioFile)}
+                >
+                  <span>
+                    {message.trim() ? (
+                      <>
+                        Inviat
+                      </>
+                    ) : (
+                      <>
+                        Invia
+                      </>
+                    )}
+                  </span>
+                </button>
 
-            <div className="flex flex-col buttons-div items-center w-full space-y-2">
-              <button
-                className="btn-send border border-gray-300 py-2 px-4 text-sm"
-                onClick={(e) => {
-                  if (message.trim()) {
-                    handleTextButtonClick(e);
-                  } else if (audioFile) {
-                    handleAudioButtonClick();
-                  }
-                }}
-                disabled={isRecording || (!message.trim() && !audioFile)}
-              >
-                <span>
-                  {message.trim() ? (
-                    <>
-                      Invia
-                    </>
-                  ) : (
-                    <>
-                      Invia
-                    </>
-                  )}
-                </span>
-              </button>
+              </div>
+              
             </div>
           </div>
 
