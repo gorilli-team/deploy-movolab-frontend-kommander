@@ -501,7 +501,7 @@ const ChatWidget = () => {
             </div>
           </div>    
           <div
-            className={`${audioFile ? "banner-custom-chat-audio" : "banner-custom-chat"} px-4 py-2`}
+            className={`${audioFile ? "banner-custom-chat-audio" : "banner-custom-chat"}`}
             ref={messageContainerRef}
           >
           {messages.map((message, index) => (
@@ -515,7 +515,7 @@ const ChatWidget = () => {
                   <div>
                     <div className="info-message-div">
                       <span className="font-bold type-user">
-                        {message.type === "user" ? "User" : "Kommander.ai"}
+                        {message.type === "user" ? fullname : "Kommander.ai"}
                       </span>
                       <span className="hour-message">{message.time}</span>
                     </div>
@@ -592,11 +592,11 @@ const ChatWidget = () => {
                 <span>
                   {message.trim() ? (
                     <>
-                      <i className="fa-solid fa-keyboard pr-2"></i>Invia messaggio
+                      Invia
                     </>
                   ) : (
                     <>
-                      <i className="fa-solid fa-file-audio pr-2"></i>Invia audio
+                      Invia
                     </>
                   )}
                 </span>

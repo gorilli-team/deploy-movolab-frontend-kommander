@@ -357,7 +357,7 @@ const Dashboard = () => {
               <div className="fixed inset-0 flex items-center justify-center z-50">
                 <div
                   style={{
-                    width: '60%',
+                    width: '900px',
                     height: '650px',
                     backgroundColor: 'white',
                     border: '1px solid #ddd',
@@ -366,7 +366,7 @@ const Dashboard = () => {
                     overflow: 'hidden',
                     zIndex: 1000,
                   }}
-                  className="relative w-11/12 max-w-4xl border border-gray-300 rounded-lg shadow-lg"
+                  className="relative border border-gray-300 rounded-lg shadow-lg"
                 >
 
                   <ChatWidget />
