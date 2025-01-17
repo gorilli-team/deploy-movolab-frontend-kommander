@@ -88,17 +88,19 @@ const ChatWidget = () => {
                 ${availableVehicles
                   .map(
                     (vehicle, index) => `
-                  <div class="vehicle-card">
-                    <div>
-                      <span class="vehicle-index">${index + 1}</span>
+                  <div class="vehicle-card flex items-center">
+                    <div class="vehicle-index-div flex items-center justify-center">
+                      <span class="vehicle-index font-bold">${index + 1}.</span>
                     </div>
                     <div class="vehicle-card-image">
                       <img src=${vehicle.version?.imageUrl} alt=${vehicle.id} />
                     </div>
                     <div class="vehicle-card-content">
-                      <p><strong>${vehicle.plate}</strong></p>
-                      <p>${vehicle.brand?.brandName}</p>
-                      <p>${vehicle.model?.modelName}</p>
+                      <p class="plate"><strong>${vehicle.plate}</strong></p>
+                      <div class="flex items-center justify-center">
+                        <p class="brand-name">${vehicle.brand?.brandName}</p>
+                        <p class="model-name">${vehicle.model?.modelName}</p>
+                      </div>
                     </div>
                   </div>`
                   )
@@ -180,17 +182,19 @@ const ChatWidget = () => {
                 ${availableVehicles
                   .map(
                     (vehicle, index) => `
-                  <div class="vehicle-card">
-                    <div>
-                      <span class="vehicle-index">${index + 1}</span>
+                  <div class="vehicle-card flex items-center">
+                    <div class="vehicle-index-div flex items-center justify-center">
+                      <span class="vehicle-index font-bold">${index + 1}.</span>
                     </div>
                     <div class="vehicle-card-image">
                       <img src=${vehicle.version?.imageUrl} alt=${vehicle.id} />
                     </div>
                     <div class="vehicle-card-content">
-                      <p><strong>${vehicle.plate}</strong></p>
-                      <p>${vehicle.brand?.brandName}</p>
-                      <p>${vehicle.model?.modelName}</p>
+                      <p class="plate"><strong>${vehicle.plate}</strong></p>
+                      <div class="flex items-center justify-center">
+                        <p class="brand-name">${vehicle.brand?.brandName}</p>
+                        <p class="model-name">${vehicle.model?.modelName}</p>
+                      </div>
                     </div>
                   </div>`
                   )
