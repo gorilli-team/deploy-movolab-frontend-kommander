@@ -479,24 +479,15 @@ const ChatWidget = () => {
       isModalOpen ? "pointer-events-none opacity-50" : ""
       }`}
       >
-          <div className="banner-custom-title flex items-center justify-between border-b border-gray-200 bg-gray-50 p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex">
-                <img 
-                  src="/logo-kommander.png" 
-                  alt="Kommander Icon" 
-                  className="w-6 h-6" 
-                />
-                <span className="font-bold text-lg ml-2">kommander.ai</span>
-              </div>
-              <div>
+          <div className="banner-custom-title flex items-center justify-between">
+            <div className="flex items-center">
+                <span className="font-bold">Prenota il tuo veicolo</span>
                 <button
                     onClick={handleConfirmExit}
-                    className="text-gray-600 hover:text-blue-500 ml-4"
+                    className="text-gray-600 hover:text-blue-500 ml-2"
                   >
-                  <i className="w-6 h-6 flex justify-center items-center fa-solid fa-pen-to-square text-xl"></i>
+                  <i className="flex justify-center items-center fa-solid fa-pen-to-square"></i>
                 </button>
-              </div>
               
             </div>
           </div>    
@@ -505,7 +496,7 @@ const ChatWidget = () => {
             ref={messageContainerRef}
           >
           {messages.map((message, index) => (
-              <div key={index} className={`w-full flex ${message.type === "user" ? "" : "justify-end"}`}>
+              <div key={index} className={`w-full flex ${message.type === "user" ? "justify-end" : "justify-start"}`}>
                 <div className={`banner-chat-${message.type} flex`}>
                   <img
                     className="logo-kommander-chat"
