@@ -493,7 +493,7 @@ const ChatWidget = () => {
                 <span className="font-bold">Prenota il tuo veicolo</span>
                 <button
                     onClick={handleConfirmExit}
-                    className="text-gray-600 hover:text-blue-500 ml-2"
+                    className="text-gray-600 ml-2 new-conversation-icon"
                   >
                   <i className="flex justify-center items-center fa-solid fa-pen-to-square"></i>
                 </button>
@@ -555,54 +555,63 @@ const ChatWidget = () => {
           </div>
   
           <div className="banner-custom-footer flex w-full items-center justify-between p-4">
-            <div className="flex flex-col w-full items-center text-area-div rounded-md border border-gray-300 p-2">
-              <textarea
-                className="w-full text-area-custom outline-none resize-none pr-2"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Scrivi un messaggio..."
-                disabled={isRecording}
-              />
-              <div className="flex items-center justify-end w-full h-full">
-                <button
-                  className="btn-microphone ml-2 text-dark focus:outline-none"
-                  onClick={handleMicrophoneClick}
-                >
-                  {isRecording ? (
-                    <i className="fa-regular fa-circle-stop text-xl"></i>
-                  ) : (
-                    <i className="fa-solid fa-microphone text-xl"></i>
-                  )}
-                </button>
-            
-                <button
-                  className="btn-send py-2 px-4 text-sm"
-                  onClick={(e) => {
-                    if (message.trim()) {
-                      handleTextButtonClick(e);
-                    } else if (audioFile) {
-                      handleAudioButtonClick();
-                    }
-                  }}
-                  disabled={isRecording || (!message.trim() && !audioFile)}
-                >
-                  <span>
-                    {message.trim() ? (
-                      <>
-                        Inviat
-                      </>
-                    ) : (
-                      <>
-                        Invia
-                      </>
-                    )}
-                  </span>
-                </button>
+  
+  {!isRecording && (
+    <div className="flex flex-col w-full items-center text-area-div rounded-md border border-gray-300 p-2">
+      <textarea
+        className="w-full text-area-custom outline-none resize-none pr-2"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder="Scrivi un messaggio..."
+        disabled={isRecording}
+      />
+      <div className="flex items-center justify-end w-full h-full">
+        <button
+          className="btn-microphone ml-2 text-dark focus:outline-none"
+          onClick={handleMicrophoneClick}
+        >
+          {isRecording ? (
+            <i className="fa-regular fa-circle-stop text-xl"></i>
+          ) : (
+            <i className="fa-solid fa-microphone text-xl"></i>
+          )}
+        </button>
 
-              </div>
-              
-            </div>
-          </div>
+        <button
+          className="btn-send py-2 px-4 text-sm"
+          onClick={(e) => {
+            if (message.trim()) {
+              handleTextButtonClick(e);
+            } else if (audioFile) {
+              handleAudioButtonClick();
+            }
+          }}
+          disabled={isRecording || (!message.trim() && !audioFile)}
+        >
+          <span>
+            {message.trim() ? (
+              <>
+                Inviat
+              </>
+            ) : (
+              <>
+                Invia
+              </>
+            )}
+          </span>
+        </button>
+      </div>
+    </div>
+  )}
+
+  {isRecording && (
+    <div className="bg-gray-50 div-audio-temp">
+      Qui ci va il pannello audio
+    </div>
+
+  )}
+</div>
+
 
 
   

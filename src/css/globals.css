@@ -68,6 +68,8 @@
   padding-left: 8px;
   font-size: 14px;
   padding-top: 2px;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 
@@ -165,8 +167,8 @@
   border: 0;
   width: 100%;
   resize: none;
-  padding: 0;
-  height: 35px;
+  height: 32px;
+  overflow-y: auto;
   background-color: transparent;
 }
 
@@ -260,7 +262,7 @@ textarea.w-full.text-area-custom::-webkit-scrollbar {
 .vehicle-index-div{
   border-right: 1px solid #e5e7eb;
   height: 100%;
-  width: 20px;
+  width: 22px;
 }
 
 .loader-container {
@@ -284,6 +286,14 @@ textarea.w-full.text-area-custom::-webkit-scrollbar {
   top:1rem;
   right: 20px;
   font-size: 15px;
+}
+
+.close-kommander-widget:hover{
+  color: #1C64F2;
+}
+
+.new-conversation-icon:hover{
+  color: #1C64F2;
 }
 
 .logo-kommander-button {

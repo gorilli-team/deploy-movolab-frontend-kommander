@@ -23,8 +23,6 @@ export const UserProvider = ({ children }) => {
     try {
       const data = await http({ method: 'GET', url: '/clientProfile/me' });
 
-      console.log("mannaggia dati utente", data);
-
       data.customisations = [];
 
       //eslint-disable-next-line

@@ -374,7 +374,7 @@ const Dashboard = () => {
                   
                   <button
                     onClick={togglePanel}
-                    className="absolute rounded-full flex justify-center items-center close-kommander-widget hover:text-blue-500"
+                    className="absolute rounded-full flex justify-center items-center close-kommander-widget"
                     style={{ zIndex: 2000 }}
                   >
                     <i className="fas fa-times"></i>
