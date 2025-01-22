@@ -23,7 +23,7 @@ const ChatWidget = () => {
   
     const messageContainerRef = useRef(null);
   
-    const { status, startRecording, stopRecording, mediaBlobUrl, error } = useReactMediaRecorder({
+    const { startRecording, stopRecording, mediaBlobUrl} = useReactMediaRecorder({
       audio: true,
       onStop: (blobUrl, blob) => {
         setAudioFile(blob);

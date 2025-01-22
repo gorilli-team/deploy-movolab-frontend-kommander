@@ -72,7 +72,7 @@
 }
 
 
-.btn-microphone, .btn-microphone-close {
+.btn-microphone {
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-right: 20px;
@@ -83,6 +83,7 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-right: 20px;
+  color: red;
 }
 
 .time-recording{
@@ -98,7 +99,7 @@
 }
 
 .btn-microphone-close:hover{
-  color:red;
+  color: darkred;
 }
 
 
@@ -210,6 +211,7 @@ textarea:focus{
   background-color: #F9FAFB;
   height: 85%;
   margin: 10px;
+  margin-bottom: 14px;
   padding: 8px;
   justify-content: center;
 }
@@ -322,7 +324,7 @@ textarea.w-full.text-area-custom::-webkit-scrollbar {
 }
 
 .close-kommander-widget:hover{
-  color: #1C64F2;
+  color: red;
 }
 
 .new-conversation-icon:hover{
@@ -379,3 +381,4 @@ textarea.w-full.text-area-custom::-webkit-scrollbar {
 .audio-panel{
   width: 88%;
 }
+
