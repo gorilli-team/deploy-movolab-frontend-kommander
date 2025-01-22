@@ -15,13 +15,15 @@ const ChatWidget = () => {
     const [audioFile, setAudioFile] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
+    const [elapsedTime, setElapsedTime] = useState(0);
     const [messages, setMessages] = useState([]);
     const [vehicles, setVehicles] = useState([]);    
     const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+    const [isRecordingAudio, setIsRecordingAudio] = useState(false);
   
     const messageContainerRef = useRef(null);
   
-    const { startRecording, stopRecording } = useReactMediaRecorder({
+    const { status, startRecording, stopRecording, mediaBlobUrl, error } = useReactMediaRecorder({
       audio: true,
       onStop: (blobUrl, blob) => {
         setAudioFile(blob);
@@ -29,9 +31,28 @@ const ChatWidget = () => {
       },
     });
 
+    const formatTime = (seconds) => {
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = seconds % 60;
+      return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
+    };
+
     useEffect(() => {
       handleNewConversation();
     }, []);
+
+    useEffect(() => {
+      let timer;
+      if (isRecording) {
+        timer = setInterval(() => {
+          setElapsedTime((prevTime) => prevTime + 1);
+        }, 1000);
+      } else {
+        clearInterval(timer);
+      }
+    
+      return () => clearInterval(timer);
+    }, [isRecording]);
   
     const addMessage = (type, content, isLoading = false) => {
       setMessages((prevMessages) => [
@@ -245,7 +266,10 @@ const ChatWidget = () => {
       } else {
         startRecording();
         setIsRecording(true);
+        setElapsedTime(0);
+        setIsRecordingAudio(true);
       }
+
     };
   
     useEffect(() => {
@@ -270,9 +294,11 @@ const ChatWidget = () => {
         if (audioFile) {
           chooseVehicleAudio();
           setAudioFile(null);
+          setIsRecordingAudio(false);
         }
       } else {
         handleAudioSubmit();
+        setIsRecordingAudio(false);
       }
     };
   
@@ -554,75 +580,89 @@ const ChatWidget = () => {
             ))}
           </div>
   
-          <div className="banner-custom-footer flex w-full items-center justify-between p-4">
+          <div className="banner-custom-footer flex w-full items-center justify-between">
+          {!isRecordingAudio && !audioFile && (
+            <div className="flex w-full items-center text-area-div rounded-md border border-gray-300">
+                <div className="text-area-div-message h-full">
+                  <textarea
+                    className="text-area-custom outline-none resize-none"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Scrivi un messaggio..."
+                    disabled={isRecording}
+                  />
+                </div>
+                  <div className="flex items-end justify-end text-area-div-button h-full">
+                    <button
+                      className="btn-microphone ml-2 text-dark focus:outline-none"
+                      onClick={handleMicrophoneClick}
+                    >
+                      <i className="fa-solid fa-microphone text-xl"></i>
+                    </button>
+                    <button
+                    className="btn-send py-2 px-4 text-sm"
+                    onClick={(e) => {
+                      if (message.trim()) {
+                        handleTextButtonClick(e);
+                      } else if (audioFile) {
+                        handleAudioButtonClick();
+                      }
+                    }}
+                    disabled={isRecording || (!message.trim() && !audioFile)}
+                    >
+                    <span>{message.trim() ? "Invia" : "Invia"}</span>
+                    </button>
+                  </div>
+                </div>
+              )}
 
-    <div className="flex flex-col w-full items-center text-area-div rounded-md border border-gray-300 p-2">
-      <textarea
-        className="w-full text-area-custom outline-none resize-none pr-2"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="Scrivi un messaggio..."
-        disabled={isRecording}
-      />
-      <div className="flex items-center justify-end w-full h-full">
-        <button
-          className="btn-microphone ml-2 text-dark focus:outline-none"
-          onClick={handleMicrophoneClick}
-        >
-          {isRecording ? (
-            <i className="fa-regular fa-circle-stop text-xl"></i>
-          ) : (
-            <i className="fa-solid fa-microphone text-xl"></i>
-          )}
-        </button>
+              {isRecordingAudio && !audioFile && (
+                <div className="flex w-full justify-center items-center h-full text-area-div rounded-md border border-gray-300">
 
-        <button
-          className="btn-send py-2 px-4 text-sm"
-          onClick={(e) => {
-            if (message.trim()) {
-              handleTextButtonClick(e);
-            } else if (audioFile) {
-              handleAudioButtonClick();
-            }
-          }}
-          disabled={isRecording || (!message.trim() && !audioFile)}
-        >
-          <span>
-            {message.trim() ? (
-              <>
-                Inviat
-              </>
-            ) : (
-              <>
-                Invia
-              </>
-            )}
-          </span>
-        </button>
-      </div>
-    </div>
+                    <span className="font-bold time-recording">{formatTime(elapsedTime)}</span>
+                 
+                    <button
+                      className="btn-microphone-close ml-2 text-dark focus:outline-none"
+                      onClick={handleMicrophoneClick}
+                    >
+                      <i className="fa-regular fa-circle-stop"></i>
+                  </button>
 
-</div>
+                </div>
+              )}
 
 
-
-  
-          <div className="bg-gray-50 div-audio-temp">
-            {audioFile && (
-              <div className="w-full max-w-md mb-2 ml-2 flex items-center">
-                <audio controls src={URL.createObjectURL(audioFile)} className="flex-grow" />
+              {isRecordingAudio && audioFile && (
+              <div className="flex w-full items-center text-area-div rounded-md border border-gray-300">
+                <audio controls src={mediaBlobUrl} className="audio-panel" />
                 <button
-                  className="ml-2 text-red-500 hover:text-red-700"
-                  onClick={() => setAudioFile(null)}
+                  className="trash-audio"
+                  onClick={() => {
+                    setAudioFile(null);
+                    setIsRecordingAudio(false);
+                  }}
                 >
                   <i className="fa-solid fa-trash"></i>
                 </button>
+                <button
+                  className="btn-send py-2 px-4 text-sm"
+                  onClick={(e) => {
+                    if (message.trim()) {
+                      handleTextButtonClick(e);
+                    } else if (audioFile) {
+                      handleAudioButtonClick();
+                    }
+                  }}
+                  disabled={isRecording || (!message.trim() && !audioFile)}
+                >
+                  <span>{message.trim() ? "Invia" : "Invia"}</span>
+                </button>
               </div>
             )}
-          </div>
         </div>
       </div>
-    );
+    </div>
+  );
 };
 
 export default ChatWidget;
