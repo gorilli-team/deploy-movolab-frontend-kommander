@@ -555,8 +555,7 @@ const ChatWidget = () => {
           </div>
   
           <div className="banner-custom-footer flex w-full items-center justify-between p-4">
-  
-  {!isRecording && (
+
     <div className="flex flex-col w-full items-center text-area-div rounded-md border border-gray-300 p-2">
       <textarea
         className="w-full text-area-custom outline-none resize-none pr-2"
@@ -602,14 +601,7 @@ const ChatWidget = () => {
         </button>
       </div>
     </div>
-  )}
 
-  {isRecording && (
-    <div className="bg-gray-50 div-audio-temp">
-      Qui ci va il pannello audio
-    </div>
-
-  )}
 </div>
 
 

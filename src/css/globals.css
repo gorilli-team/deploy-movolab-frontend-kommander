@@ -167,7 +167,7 @@
   border: 0;
   width: 100%;
   resize: none;
-  height: 32px;
+  height: 35px;
   overflow-y: auto;
   background-color: transparent;
 }
@@ -179,6 +179,7 @@ textarea:focus{
 .text-area-div{
   width: 100%;
   background-color: #F9FAFB;
+  padding-top: 0;
 }
 
 .buttons-div{
